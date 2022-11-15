@@ -1,0 +1,33 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+gunicorn = "*"
+click = "*"
+six = "*"
+itsdangerous = "*"
+python-dotenv = "*"
+flask = "*"
+flask-cors = "*"
+flask-wtf = "*"
+flask-sqlalchemy = "*"
+flask-migrate = "*"
+flask-login = "*"
+jinja2 = "*"
+markupsafe = "*"
+sqlalchemy = "*"
+werkzeug = "*"
+wtforms = "*"
+alembic = "*"
+mako = "*"
+greenlet = "*"
+python-dateutil = "*"
+python-editor = "*"
+psycopg2-binary = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.10"
