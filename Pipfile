@@ -13,7 +13,6 @@ flask = "*"
 flask-cors = "*"
 flask-wtf = "*"
 flask-sqlalchemy = "*"
-flask-migrate = "*"
 flask-login = "*"
 jinja2 = "*"
 markupsafe = "*"
@@ -29,8 +28,11 @@ psycopg2-binary = "*"
 email-validator = "*"
 idna = "*"
 dnspython = "*"
+flask-migrate = "*"
+flask-script = "*"
 
 [dev-packages]
+psycopg2-binary = "*"
 
 [requires]
 python_version = "3.10"

@@ -6,16 +6,24 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 
 class User(db.Model, UserMixin):
-        __tablename__ = 'users'
+        __tablename__ = 'users' # why is this coming back as an Undefinded Table error?
+        def __repr__(self): 
+                return f"<User {self.id} {self.username} {self.email} {self.created_at} {self.updated_at}>"
         
         id = db.Column(db.Integer, primary_key=True)
         username = db.Column(db.String(40), nullable=False, unique=True)
         email = db.Column(db.String(255), nullable=False, unique=True)
         hashed_password = db.Column(db.String(255), nullable=False)
-        created_at = db.Column(db.DateTime, nullable=False, server_default=db.func.now())  #  defaults to the current time 
-        updated_at = db.Column(db.DateTime, nullable=False, server_default=db.func.now(), server_onupdate=db.func.now())  #  defaults to the current time and updates to the current time on update
+       
         
-
+         
+          
+           
+            
+        def __str__(self): 
+                return f"<User {self.id} {self.username} {self.email} {self.created_at} {self.updated_at}>"
+       
+            
 
         @property
         def password(self):

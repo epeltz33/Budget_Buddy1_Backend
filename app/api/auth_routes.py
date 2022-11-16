@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request, session
 from app.models import User, db
 from app.forms import LoginForm
-from app.forms import RegisterForm
+from app.forms import  SignUpForm
 from flask_login import login_user, logout_user, current_user, login_required
 from datetime import date
 
@@ -55,7 +55,7 @@ def register():
     """
         Register user
     """
-    form = RegisterForm()
+    form = SignUpForm()
     form.csrf_token = request.cookies.get('csrf_token')
     if form.validate_on_submit():
         user = User(
