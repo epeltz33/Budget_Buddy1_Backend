@@ -1,7 +1,7 @@
 import os 
 
 
-class Config(object): # object is the base class for all classes in Python 
+class Config(): 
      
      
      SECRET_KEY = os.environ.get('SECRET_KEY') 
