@@ -16,6 +16,8 @@ from .seeds import seed_commands
 
 app = Flask(__name__)
 
+
+
 login = LoginManager(app)
 login.login_view = 'auth.unauthorized'
  
