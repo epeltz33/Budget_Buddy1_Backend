@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request, session
 from app.models import User, db
-from app.auth import LoginForm
-from app.auth import RegisterForm
+from app.forms import LoginForm
+from app.forms import RegisterForm
 from flask_login import login_user, logout_user, current_user, login_required
 from datetime import date
 
@@ -12,13 +12,12 @@ auth_routes = Blueprint('auth', __name__)
 
 # function that will take WTForms validation errors and return them as a list
   
-def WTForms_errors_to_list(form):
+def WTForms_errors_to_list(validation_errors):
     errors = []
-    for field in form:
-        for error in field.errors:
-            errors.append(error)
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            errors.append(f'{field} : {error}')
     return errors
-
 
 # auth_route decorator function for checking if user is authenticated
   
