@@ -26,6 +26,9 @@ greenlet = "*"
 python-dateutil = "*"
 python-editor = "*"
 psycopg2-binary = "*"
+email-validator = "*"
+idna = "*"
+dnspython = "*"
 
 [dev-packages]
 
