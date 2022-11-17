@@ -29,7 +29,7 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.hashed_password, password)
 
-    def __repr__(self): #  __repr__ is a special method that tells Python how to print objects of a class
-        return '<User %r>' % self.username + '<' + self.password + '>' + '<' + self.email + '>'
- 
-
+    def __repr__(self):
+        return f"<User {self.id}: {self.username}, {self.email}>"
+    
+    

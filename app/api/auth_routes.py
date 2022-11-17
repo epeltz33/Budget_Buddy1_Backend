@@ -25,16 +25,13 @@ def WTForms_errors_to_list(validation_errors):
 def authenticate():
     if current_user.is_authenticated:
         return current_user.to_dict()
-    return {'errors': ['Unauthorized']}, 401
+    return {'errors': ['unauthenticated']}, 401
 
 
 
-@auth_routes.route('/login', methods=['POST'])
+@auth_routes.route('/login', methods=['POST', 'GET'])
 def login():
-     """
-        Login user
-     """
-     
+    
      form = LoginForm()
     # retrieve csrf_token from request cookie and add it to the form 
      form.csrf_token = request.cookies.get('csrf_token')
@@ -73,4 +70,4 @@ def register():
 
 @auth_routes.route('/unauthenticated')
 def unauthenticated():
-    return {'errors': ['Unauthorized']}, 401
+    return {'errors': ['unauthenticated']}, 401
