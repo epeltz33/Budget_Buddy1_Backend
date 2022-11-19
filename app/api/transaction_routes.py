@@ -26,4 +26,11 @@ def add_transaction():
     
     return new_transaction.to_dict()
 
- 
+@transaction_routes.route('/<int:transactionId>', methods=['DELETE'])
+@login_required
+def delete_transaction(transactionId):
+    transaction = Transaction.query.get(transactionId)
+    db.session.delete(transaction)
+    db.session.commit()
+    return transaction.to_dict()
+
