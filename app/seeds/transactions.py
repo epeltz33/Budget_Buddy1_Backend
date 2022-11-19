@@ -27,49 +27,49 @@ def seed_transactions(): # this is the function that will seed the transactions 
         account_id=1,
         transaction_amount=400.00,
         transaction_date=datetime(2021, 2, 4),
-        transaction_recipient='Walmart',
+        transaction_recipient='Whole Foods',
         category_id=3,
     )
     transaction5 = Transaction(
         account_id=1,
         transaction_amount=500.00,
         transaction_date=datetime(2021, 3, 5),
-        transaction_recipient='Walmart',
+        transaction_recipient='PSE&G', # public service electric and gas 
         category_id=3,
     )
     transaction6 = Transaction(
         account_id=1,
         transaction_amount=600.00,
         transaction_date=datetime(2021, 1, 6),
-        transaction_recipient='Walmart',
+        transaction_recipient='Verizon',
         category_id=3,
     )
     transaction7 = Transaction(
         account_id=1,
         transaction_amount=700.00,
         transaction_date=datetime(2021, 1, 7),
-        transaction_recipient='Walmart',
+        transaction_recipient='Lexus',
         category_id=3,
     )
     transaction8 = Transaction(
         account_id=1,
         transaction_amount=800.00,
         transaction_date=datetime(2021, 1, 8),
-        transaction_recipient='Walmart',
+        transaction_recipient='Apple',
         category_id=3,
     )
     transaction9 = Transaction(
         account_id=1,
         transaction_amount=900.00,
         transaction_date=datetime(2021, 1, 9),
-        transaction_recipient='Walmart',
+        transaction_recipient='Chase',
         category_id=3,
     )
     transaction10 = Transaction(
         account_id=1,
         transaction_amount=1000.00,
         transaction_date=datetime(2021, 1, 10),
-        transaction_recipient='Walmart',
+        transaction_recipient='American Express',
         category_id=3,
     )
     
