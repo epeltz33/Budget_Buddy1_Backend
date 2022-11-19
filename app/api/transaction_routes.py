@@ -16,11 +16,11 @@ def get_all_transactions():
 @transaction_routes.route('/', methods=['POST'])
 @login_required
 def add_transaction():
-    new_transaction = Transaction(transaction_date=request.json['transaction_date'],
+    new_transaction = Transaction(transaction_date=request.json['transaction_date'], # this is the date of the transaction
       transaction_recipient=request.json['transaction_recipient'],
       transaction_amount=request.json['transaction_amount'],
       categoryId=request.json['categoryId'],
-    accountId=request.json['accountId'])
+      accountId=request.json['accountId'])
     db.session.add(new_transaction)
     db.session.commit()
     
