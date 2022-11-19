@@ -1,5 +1,5 @@
 from flask.cli import AppGroup
-from .users import seed_users, undo_users
+from .users import seed_users, undo_users, seed_transactions, undo_transactions, seed_budgets, undo_budgets, seed_accounts, undo_accounts, seed_categories, undo_categories
 
 
 # this will make a seed group to hold all the seed commands
@@ -13,7 +13,10 @@ seed_commands = AppGroup('seed')
 @seed_commands.command('all')
 def seed():
     seed_users()
-    # add more seed commands when I make more models
+    seed_accounts()
+    seed_categories()
+    seed_budgets()
+    seed_transactions()
 
 
 # this is the undo command that will use the undo function I defined above
@@ -21,5 +24,7 @@ def seed():
 @seed_commands.command('undo')
 def undo():
     undo_users()
-    # add more undo commands when I make more models
-    # example usage: flask seed undo users  (this will undo the users table)
+    undo_accounts()
+    undo_categories()
+    undo_budgets()
+    undo_transactions() 
