@@ -19,4 +19,21 @@ def all_transactions():
 @transaction_routes.route('/', methods=['POST'])
 @login_required
 def add_transaction():
-    trans_payee = request.json['trans_payee'], # trans_payee is a string of the payee name
+    new_transaction = Transaction(trans_date=request.json['trans_date'],
+      trans_payee=request.json['trans_payee'],
+      trans_amount=request.json['trans_amount'],
+      accountId=request.json['accountId'])
+    db.session.add(new_transaction)
+    db.session.commit()
+
+    return new_transaction.to_dict() # return the new transaction
+
+@transaction_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
+
+def delete_transaction(id):
+    transaction = Transaction.query.get(id)
+    db.session.delete(transaction)
+    db.session.commit()
+    return transaction.to_dict()
+
