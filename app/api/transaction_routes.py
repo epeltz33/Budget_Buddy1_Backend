@@ -32,5 +32,18 @@ def delete_transaction(transactionId):
     transaction = Transaction.query.get(transactionId)
     db.session.delete(transaction)
     db.session.commit()
+    return transaction.to_dict() 
+
+@transaction_routes.route('/<int:transactionId>', methods=['PUT'])
+@login_required
+def edit_transaction(transactionId):
+    transaction = Transaction.query.get(transactionId)
+    transaction.transaction_date = request.json['transaction_date']
+    transaction.transaction_recipient = request.json['transaction_recipient']
+    transaction.transaction_amount = request.json['transaction_amount']
+    transaction.categoryId = request.json['categoryId']
+    transaction.accountId = request.json['accountId']
+    db.session.commit()
     return transaction.to_dict()
+ 
 
