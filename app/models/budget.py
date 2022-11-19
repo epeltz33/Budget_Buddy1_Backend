@@ -12,3 +12,12 @@ class Budget(db.Model):
     
     user = db.relationship('User', back_populates='budgets') # one to many relationship with user model
     category = db.relationship('Category', back_populates='budgets') # this is the relationship to the category table
+    
+    def to_dict(self): # this is the dictionary that will be returned when the budget is queried
+        return {
+            'id': self.id,
+            'budget_amount': self.budget_amount,
+            'budget_name': self.budget_name,
+            'category_id': self.category_id,
+            'userId': self.userId,
+        }
