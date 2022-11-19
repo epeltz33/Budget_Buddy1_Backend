@@ -17,5 +17,5 @@ class Account(db.model):
 			'id': self.id,
 			'account_name': self.account_name,
 			'userId': self.userId,
-			'transactions': [transaction.to_dict() for transaction in self.transactions]
+      'transactions': [transaction.to_dict() for transaction in self.transactions]
 		}
