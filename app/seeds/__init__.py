@@ -17,8 +17,6 @@ def seed():
     seed_categories()
     seed_budgets()
     seed_transactions()
-
-
 # this is the undo command that will use the undo function I defined above
 
 @seed_commands.command('undo')
