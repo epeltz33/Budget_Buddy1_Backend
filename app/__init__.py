@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, jsonify
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_cors import CORS
@@ -23,7 +23,7 @@ app = Flask(__name__)
 
 # login manager configuration
 login = LoginManager(app)
-login.login_view = 'auth.unauthorized' # route for unauthorized users
+login.login_view = 'auth.unauthenticated' # route for unauthorized users
 
 @login.user_loader # decorator for loading a user by id
 def load_user(id):
@@ -53,8 +53,16 @@ Migrate(app, db) # initialize migration with app and database as arguments
 CORS(app, resources={r'/*': {'origins': '*'}})
 
 
-@app.route('/', defaults={'path': ''}) # defaults to index.html if no path is provided
-@app.route('/<path:path>') # allows for any path to be provided
+@app.route('/', defaults={'path': ''}) 
+@app.route('/<path:path>', methods=['GET', 'POST']) 
+@app.route('/api/test', methods=['GET'])
+def test():
+    if request.method == 'GET':
+        return jsonify({'response': 'Get request received'})
+ 
 def react_root(path):
     return app.send_static_file('index.html') # sends index.html file 
- 
+
+
+if __name__ == '__main__':
+    app.run(debug=True, host=' 127.0.0.1', port=5000)
