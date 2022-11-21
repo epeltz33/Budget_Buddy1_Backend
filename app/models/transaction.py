@@ -1,11 +1,11 @@
 from .db import db
 from datetime import datetime
-from sqlalchemy import Index #  
+from sqlalchemy import Index 
 
 class Transaction(db.Model):
     __tablename__ = 'transactions'
     
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True,  autoincrement=True)
     account_id = db.Column(db.Integer, db.ForeignKey('accounts.id'), nullable=False)
     transaction_amount = db.Column(db.Float, nullable=False)
     transaction_date = db.Column(db.DateTime, nullable=False)
@@ -25,5 +25,5 @@ class Transaction(db.Model):
             'category_id': self.category_id,
         }
         
-        Index('transaction_index', Transaction.transaction_recipient, postgresql_using='hash') # hash is the index type 
+Index('transaction_index', Transaction.transaction_recipient, postgresql_using='hash') # hash is the index type 
          
