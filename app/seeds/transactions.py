@@ -90,4 +90,4 @@ def undo_transactions(): # this is the function that will delete all the data fr
     db.session.execute('TRUNCATE transactions RESTART IDENTITY CASCADE;')
     db.session.commit()
 
-# Path: app/seeds/users.py -- this is the file that will seed the users table with data from the database and the users table
+# Path: app/seeds/__init__.py

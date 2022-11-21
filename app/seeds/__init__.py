@@ -1,5 +1,10 @@
 from flask.cli import AppGroup
-from .users import seed_users, undo_users, seed_transactions, undo_transactions, seed_budgets, undo_budgets, seed_accounts, undo_accounts, seed_categories, undo_categories
+from .users import seed_users, undo_users
+from .categories import seed_categories, undo_categories
+from .accounts import seed_accounts, undo_accounts
+from .transactions import seed_transactions, undo_transactions
+from .budgets import seed_budgets, undo_budgets
+
 
 
 # this will make a seed group to hold all the seed commands

@@ -2,8 +2,8 @@ from sqlalchemy import PrimaryKeyConstraint
 from .db import db
 
 
-class Account(db.model):
-    __table__ = 'accounts'
+class Account(db.Model):
+    __tablename__ = 'accounts'
 
     id = db.Column(db.Integer, primary_key=True)
     account_name = db.Column(db.String(50), nullable=False)

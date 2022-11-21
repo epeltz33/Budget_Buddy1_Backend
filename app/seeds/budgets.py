@@ -34,3 +34,7 @@ def seed_budgets():
  db.session.add(Entertainment)
  db.session.add(Transportation)
  db.session.commit()
+ 
+def undo_budgets():
+    db.session.execute('TRUNCATE budgets RESTART IDENTITY CASCADE;')
+    db.session.commit()
