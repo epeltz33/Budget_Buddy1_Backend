@@ -2,13 +2,8 @@ import os
 
 
 class Config(): 
-     
-     
-     SECRET_KEY = os.environ.get('SECRET_KEY') 
-     SQLALCHEMY_TRACK_MODIFICATIONS = False 
-        
-        # the .replace() is for when you deploy to Heroku  
-     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL').replace('postgres://', 'postgresql://')
-     SQLALCHEMY_ECHO = True # prints out the SQL queries that are run in the terminal
-  
-     
+      SECRET_KEY =  os.environ.get('SECRET_KEY') or 'you-will-never-guess'
+      SQLALCHEMY_TRACK_MODIFICATIONS = False
+      
+      SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'postgresql://my_projectsTheboys36@localhost:5432/budget_buddy1'
+      SQLALCHEMY_ECHO = True 
