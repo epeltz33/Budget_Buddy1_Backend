@@ -1,8 +1,9 @@
+
 from flask import Blueprint, jsonify
 from flask_login import login_required
 from app.models import User
 
-user_routes = Blueprint('users', __name__) # for backwards compatibility with flask-login
+user_routes = Blueprint('users', __name__) # Blueprint configuration for user routes
 
 
 @user_routes.route('/') 
