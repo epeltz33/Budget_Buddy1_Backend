@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request, session
-from app.models import User, db
+from app.models import User, db,Budget, Account, Transaction
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import login_user, logout_user, current_user, login_required
@@ -12,62 +12,98 @@ auth_routes = Blueprint('auth', __name__)
 
 # function that will take WTForms validation errors and return them as a list
   
-def WTForms_errors_to_list(validation_errors):
-    errors = []
+def validation_errors_to_error_messages(validation_errors):
+    """
+    Simple function that takes WTForms validation errors and turns them into a simple list
+    """
+    errorMessages = []
     for field in validation_errors:
         for error in validation_errors[field]:
-            errors.append(f'{field} : {error}')
-    return errors
+            errorMessages.append(f"{field} : {error}")
+    return errorMessages
 
-# auth_route decorator function for checking if user is authenticated
-  
 @auth_routes.route('/')
 def authenticate():
+    """
+    Authenticates a user.
+    """
     if current_user.is_authenticated:
         return current_user.to_dict()
-    return {'errors': ['unauthenticated']}, 401
+    return {'errors': ['Unauthorized']}
 
 
-
-@auth_routes.route('/login', methods=['POST', 'GET'])
+@auth_routes.route('/login', methods=['POST'])
 def login():
-    
-     form = LoginForm()
-    # retrieve csrf_token from request cookie and add it to the form 
-     form.csrf_token = request.cookies.get('csrf_token')
-     if form.validate_on_submit():
-         user = User.query.filter(User.email == form.data['email']).first()
-         login_user(user)
-         return user.to_dict()
-     else:
-       return {'error': WTForms_errors_to_list(form.errors)}, 401
+    """
+    Logs a user in
+    """
+    form = LoginForm()
+    # Get the csrf_token from the request cookie and put it into the
+    # form manually to validate_on_submit can be used
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        # Add the user to the session, we are logged in!
+        user = User.query.filter(User.email == form.data['email']).first()
+        login_user(user)
+        return user.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
 
 @auth_routes.route('/logout')
 def logout():
-    logout_user()
-    return {'message': 'User has logged out'}
-
-@auth_routes.route('/register', methods=['POST'])
-def register():
     """
-        Register user
+    Logs a user out
+    """
+    logout_user()
+    return {'message': 'User logged out'}
+
+
+@auth_routes.route('/signup', methods=['POST'])
+def sign_up():
+    """
+    Creates a new user and logs them in
     """
     form = SignUpForm()
-    form.csrf_token = request.cookies.get('csrf_token')
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         user = User(
             username=form.data['username'],
             email=form.data['email'],
             password=form.data['password']
         )
-        db.session.add(user) # session is a collection of objects that write to the database
-        db.session.commit() 
-        login_user(user) # login user after registering
-        
+        db.session.add(user)
+        db.session.commit()
+        login_user(user)
+
+        account = Account(account_name='My First Account', userId=user.id)
+        db.session.add(account)
+        db.session.commit()
+
+        dining_trans = Transaction(trans_date=date.today(), trans_payee='Restaurant', trans_amount=100.00, categoryId=6, accountId=account.id)
+        groceries_trans = Transaction(trans_date=date.today(), trans_payee='Supermarket', trans_amount=50.00, categoryId=13, accountId=account.id)
+        shopping_trans = Transaction(trans_date=date.today(), trans_payee='Store', trans_amount=100.00, categoryId=19, accountId=account.id)
+        db.session.add(dining_trans)
+        db.session.add(groceries_trans)
+        db.session.add(shopping_trans)
+        db.session.commit()
+
+        total = Budget(budget_name='Total', budget_amount=2500, categoryId=1, userId=user.id)
+        shopping = Budget(budget_name='Shopping', budget_amount=1000, categoryId=19, userId=user.id)
+        groceries = Budget(budget_name='Groceries', budget_amount=500, categoryId=13, userId=user.id)
+        dining = Budget(budget_name='Dining', budget_amount=1000, categoryId=6, userId=user.id)
+        db.session.add(total)
+        db.session.add(shopping)
+        db.session.add(groceries)
+        db.session.add(dining)
+        db.session.commit()
+
         return user.to_dict()
-    return {'error': WTForms_errors_to_list(form.errors)}, 401
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
-@auth_routes.route('/unauthenticated')
-def unauthenticated():
-    return {'errors': ['unauthenticated']}, 401
+@auth_routes.route('/unauthorized')
+def unauthorized():
+    """
+    Returns unauthorized JSON when flask-login authentication fails
+    """
+    return {'errors': ['Unauthorized']}, 401

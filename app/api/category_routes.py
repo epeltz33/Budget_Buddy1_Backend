@@ -12,5 +12,7 @@ category_routes = Blueprint('categories', __name__)
 @login_required
 # The route function for getting all categories for a user
 def get_all_categories():
-    categories = Category.query.filter(Category.user_id == current_user.get_id()).all()
-    return {"categories": [category.to_dict() for category in categories]}
+     categories = Category.query.all()
+     return {'all_categories': [category.to_dict() for category in categories]}
+
+    
