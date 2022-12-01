@@ -53,16 +53,10 @@ Migrate(app, db) # initialize migration with app and database as arguments
 CORS(app, resources={r'/*': {'origins': '*'}})
 
 
-@app.route('/', defaults={'path': ''}) 
-@app.route('/<path:path>', methods=['GET', 'POST']) 
-@app.route('/api/test', methods=['GET'])
-def test():
-    if request.method == 'GET':
-        return jsonify({'response': 'Get request received'})
- 
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
 def react_root(path):
-    return app.send_static_file('index.html') # sends index.html file 
-
-
-if __name__ == '__main__':
-    app.run(debug=True, host=' 127.0.0.1', port=5000)
+    if path == 'favicon.ico':
+        return app.send_static_file('favicon.ico')
+    return app.send_static_file('index.html')
