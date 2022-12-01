@@ -13,25 +13,22 @@ class User(db.Model, UserMixin):
     
     accounts = db.relationship('Account', back_populates='user', cascade='all, delete') # one to many relationship with accounts
     budgets = db.relationship('Budget', back_populates='user', cascade='all, delete') # one to many relationship with budgets
-    def to_dict(self):
-        return {
-            "id": self.id,
-            "username": self.username,
-            "email": self.email,
-        }
-
+    
     @property
     def password(self):
         return self.hashed_password
-
+    
     @password.setter
     def password(self, password):
         self.hashed_password = generate_password_hash(password)
-
+        
     def check_password(self, password):
-        return check_password_hash(self.hashed_password, password)
-
-    def __repr__(self):
-        return f"<User {self.id}: {self.username}, {self.email}>"
+        return check_password_hash(self.password, password)
     
-    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'email': self.email
+        }
+        
