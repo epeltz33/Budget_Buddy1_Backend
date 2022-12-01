@@ -7,7 +7,7 @@ class Budget(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     budget_amount = db.Column(db.Float, nullable=False)
     budget_name = db.Column(db.String(40), nullable=False)
-    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=False)
+    categoryId = db.Column(db.Integer, db.ForeignKey('categories.id'))
     userId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     
     user = db.relationship('User', back_populates='budgets') # one to many relationship with user model
@@ -18,6 +18,6 @@ class Budget(db.Model):
             'id': self.id,
             'budget_amount': self.budget_amount,
             'budget_name': self.budget_name,
-            'category_id': self.category_id,
+            'categoryId': self.category_id,
             'userId': self.userId,
         }
