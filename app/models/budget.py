@@ -18,6 +18,6 @@ class Budget(db.Model):
             'id': self.id,
             'budget_amount': self.budget_amount,
             'budget_name': self.budget_name,
-            'categoryId': self.category_id,
+            'categoryId': self.categoryId,
             'userId': self.userId,
         }
