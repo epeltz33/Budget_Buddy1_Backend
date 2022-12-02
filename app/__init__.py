@@ -50,7 +50,7 @@ Migrate(app, db) # initialize migration with app and database as arguments
 
 
 # CORS configuration
-CORS(app, resources={r'/*': {'origins': '*'}})
+CORS(app, resources={r'/*': {'origins': '*'}}) # allow all origins for all routes 
 
 
 
