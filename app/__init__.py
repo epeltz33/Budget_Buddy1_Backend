@@ -54,12 +54,12 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 
 
 
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def react_root(path):
-    if path == "favicon.ico":
-        return app.send_static_file('favicon.ico')
-    return app.send_static_file('index.html')
+@app.route('/', defaults={'path': ''}) # default route for react router 
+@app.route('/<path:path>') # route for react router
+def react_root(path): # function to render react app
+    if path == "favicon.ico": # if favicon is requested 
+        return app.send_static_file('favicon.ico') 
+    return app.send_static_file('index.html') # send index.html file for react app
  
 if __name__ == '__main__':
     app.run(debug=True)
