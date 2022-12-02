@@ -9,7 +9,7 @@ category_routes = Blueprint('categories', __name__)
 # Route
 @category_routes.route('/')
 # Login Required
-@login_required
+#@login_required
 # The route function for getting all categories for a user
 def get_all_categories():
      categories = Category.query.all()

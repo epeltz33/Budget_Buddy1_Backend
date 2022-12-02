@@ -1,60 +1,67 @@
-
 from flask import Blueprint, request
 from app.models import db, Transaction, Account
 from flask_login import current_user, login_required
 from sqlalchemy import func
 
-
 transaction_routes = Blueprint('transactions', __name__)
 
+
 @transaction_routes.route('/')
-@login_required
+#@login_required
 def get_all_transactions():
-  transactions = Transaction.query.join(Account).filter(Account.userId == current_user.get_id()).order_by(Transaction.trans_date.desc())
-  return {'all_transactions': [transaction.to_dict() for transaction in transactions]} # This is a list of dictionaries
+    transactions = Transaction.query.join(Account)
+
+    return {
+        'all_transactions':
+        [transaction.to_dict() for transaction in transactions]
+    }  # This is a list of dictionaries
+
 
 @transaction_routes.route('/', methods=['POST'])
-@login_required
+#@login_required
 def add_transaction():
-  new_transaction =  Transaction(trans_date=request.json['trans_date'],
-    trans_payee=request.json['trans_payee'],
-    trans_amount=request.json['trans_amount'],
-    categoryId=request.json['categoryId'],
-    accountId=request.json['accountId'])
-  db.session.add(new_transaction)
-  db.session.commit()
+    new_transaction = Transaction(trans_date=request.json['trans_date'],
+                                  trans_payee=request.json['trans_payee'],
+                                  trans_amount=request.json['trans_amount'],
+                                  categoryId=request.json['categoryId'],
+                                  accountId=request.json['accountId'])
+    db.session.add(new_transaction)
+    db.session.commit()
 
-  return new_transaction.to_dict()
+    return new_transaction.to_dict()
 
 
-@transaction_routes.route('/<int:transactionId>',methods=['DELETE'])
-@login_required
+@transaction_routes.route('/<int:transactionId>', methods=['DELETE'])
+#@login_required
 def delete_transaction(transactionId):
-  transaction = Transaction.query.get(transactionId)
-  db.session.delete(transaction)
-  db.session.commit()
+    transaction = Transaction.query.get(transactionId)
+    db.session.delete(transaction)
+    db.session.commit()
 
-  return transaction.to_dict()
+    return transaction.to_dict()
 
 
 @transaction_routes.route('/<int:transactionId>', methods=['PUT'])
-@login_required
+#@login_required
 def edit_transaction(transactionId):
-  transaction=Transaction.query.get(transactionId)
-  transaction.trans_payee=request.json['trans_payee']
-  transaction.trans_date=request.json['trans_date']
-  transaction.trans_amount=request.json['trans_amount']
-  transaction.categoryId=request.json['categoryId']
-  transaction.accountId=request.json['accountId']
+    transaction = Transaction.query.get(transactionId)
+    transaction.trans_payee = request.json['trans_payee']
+    transaction.trans_date = request.json['trans_date']
+    transaction.trans_amount = request.json['trans_amount']
+    transaction.categoryId = request.json['categoryId']
+    transaction.accountId = request.json['accountId']
 
-  db.session.commit()
+    db.session.commit()
 
-  return transaction.to_dict()
+    return transaction.to_dict()
 
 
 @transaction_routes.route('/filter')
-@login_required
+#@login_required
 def filter_by_payee():
-  payeeQuery = request.args.get('payee')
-  transactions = Transaction.query.filter(func.lower(Transaction.trans_payee) == func.lower(payeeQuery)).order_by(Transaction.trans_date.desc())
-  return {'payee_transactions': [transaction.to_dict() for transaction in transactions]}
+    payeeQuery = request.args.get('payee')
+    transactions = Transaction.query.all()
+    return {
+        'payee_transactions':
+        [transaction.to_dict() for transaction in transactions]
+    }
