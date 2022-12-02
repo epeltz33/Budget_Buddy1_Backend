@@ -34,9 +34,9 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('budget_amount', sa.Float(), nullable=False),
     sa.Column('budget_name', sa.String(length=50), nullable=False),
-    sa.Column('category_id', sa.Integer(), nullable=False),
+    sa.Column('categoryId', sa.Integer(), nullable=False),
     sa.Column('userId', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['category_id'], ['categories.id'], ),
+    sa.ForeignKeyConstraint(['categoryId'], ['categories.id'], ),
     sa.ForeignKeyConstraint(['userId'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -46,9 +46,9 @@ def upgrade():
     sa.Column('transaction_amount', sa.Float(), nullable=False),
     sa.Column('transaction_date', sa.DateTime(), nullable=False),
     sa.Column('transaction_recipient', sa.String(length=100), nullable=False),
-    sa.Column('category_id', sa.Integer(), nullable=False),
+    sa.Column('categoryId', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['account_id'], ['accounts.id'], ),
-    sa.ForeignKeyConstraint(['category_id'], ['categories.id'], ),
+    sa.ForeignKeyConstraint(['categoryId'], ['categories.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###

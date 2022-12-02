@@ -12,8 +12,9 @@ from .budgets import seed_budgets, undo_budgets
 
 seed_commands = AppGroup('seed')
 
-
-# this is the seed command that will use the seed function I defined above
+# how do I seed just one table?
+# to seed one tables like budget, run: flask seed budget
+# to seed all tables, run: flask seed all 
 
 @seed_commands.command('all')
 def seed():
@@ -23,7 +24,7 @@ def seed():
     seed_budgets()
     seed_transactions()
 # this is the undo command that will use the undo function I defined above
-
+# to undo all the seed commands above, run: flask seed undo all
 @seed_commands.command('undo')
 def undo():
     undo_users()
@@ -31,3 +32,5 @@ def undo():
     undo_categories()
     undo_budgets()
     undo_transactions() 
+    
+    

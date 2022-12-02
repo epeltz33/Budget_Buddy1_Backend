@@ -23,7 +23,7 @@ app = Flask(__name__)
 
 # login manager configuration
 login = LoginManager(app)
-login.login_view = 'auth.unauthenticated' # route for unauthorized users
+login.login_view = 'auth.authenticate' # route for unauthorized users
 
 @login.user_loader # decorator for loading a user by id
 def load_user(id):
@@ -54,9 +54,13 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 
 
 
-@app.route('/', defaults={'path': ''})
+@app.route('/', defaults={'path': ''}) # this is the route for the react app    that will be served from the root directory of the flask app 
 @app.route('/<path:path>')
 def react_root(path):
     if path == 'favicon.ico':
         return app.send_static_file('favicon.ico')
     return app.send_static_file('index.html')
+
+if __name__ == '__main__':
+    app.run()
+    

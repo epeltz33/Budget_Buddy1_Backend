@@ -5,7 +5,6 @@ class Category(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     category_name = db.Column(db.String(40), nullable=False)
-    
     transactions = db.relationship('Transaction', back_populates='category', cascade='all, delete')
     budgets = db.relationship('Budget', back_populates='category', cascade='all, delete')
 

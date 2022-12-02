@@ -16,7 +16,9 @@ def seed_users():
     db.session.commit()
     
     
-def undo_users():
+def undo_users(): # this is the undo function for the seed function above  
+    # this will delete all the rows in the users table
+    # ex: 
 	db.session.execute('TRUNCATE users RESTART IDENTITY CASCADE;')
 	db.session.commit()
 
