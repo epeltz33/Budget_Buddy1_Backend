@@ -117,9 +117,9 @@ def sign_up():
 
     return user.to_dict()
 
-    #@auth_routes.route('/unauthorized')
-    #def unauthorized():
+@auth_routes.route('/unauthorized')
+def unauthorized():
     """
     Returns unauthorized JSON when flask-login authentication fails
     """
-    #return {'errors': ['Unauthorized']}, 401
+    return {'errors': ['Unauthorized']}, 401

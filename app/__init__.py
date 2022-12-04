@@ -21,6 +21,7 @@ app = Flask(__name__)
 # login manager configuration
 login = LoginManager(app)
 login.login_view = 'auth.unauthorized'
+login.init_app(app)
 
 
 @login.user_loader  # decorator for loading a user by id
