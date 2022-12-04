@@ -2,6 +2,7 @@ from flask_login import current_user, login_required
 from flask import Blueprint, request
 from app.models import Account, db
 
+
 # Blueprint
 account_routes = Blueprint('accounts', __name__) 
 
@@ -31,7 +32,9 @@ def delete_account(accountId):
 
   return account.to_dict()
 
-# fetch('/api/accounts/7', {method: 'Delete'}).then(res => res.json()).then(data => console.log(data));
+
+
+
 
 @account_routes.route('/<int:accountId>', methods=['PUT'])
 @login_required
