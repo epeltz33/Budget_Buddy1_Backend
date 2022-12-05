@@ -1,4 +1,4 @@
-from flask_login import current_user, login_required, login_manager
+from flask_login import current_user, login_required
 from flask import Blueprint, request
 from app.models import Account, db
 
@@ -23,10 +23,12 @@ def add_account():
   print(current_user.id)
   new_account = Account(
     account_name=request.json['account_name'],
-    user_id=current_user.id
+    userId=current_user.get_id() # This is the user id of the logged in user
   )
   db.session.add(new_account)
   db.session.commit()
+  
+  
   return new_account.to_dict()
 
   

@@ -20,8 +20,11 @@ app = Flask(__name__)
 
 # login manager configuration
 login = LoginManager(app)
+#login.init_app(app)
 login.login_view = 'auth.unauthorized'
-login.init_app(app)
+login.login_message = 'Please log in to access this page.'
+
+
 
 
 @login.user_loader  # decorator for loading a user by id
@@ -46,12 +49,14 @@ app.register_blueprint(category_routes, url_prefix='/api/categories')
 db.init_app(app)  # initialize database with app as argument
 Migrate(app, db)  # initialize migration with app and database as arguments
 
-CORS(app)  # initialize CORS with app as argument and database as argument
-
+# CORS configuration
+CORS(app)
 app.config[
     'CORS_HEADERS'] = 'Content-Type', 'Authorization', 'Access-Control-Allow-Origin'
 app.config[
     'CORS_ORIGINS'] = '*', 'http://localhost:3000', 'http://localhost:5000'
+app.config[
+    'CORS_METHODS'] = 'GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'
 
 
 @app.route('/', defaults={'path': ''})
