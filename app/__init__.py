@@ -52,11 +52,17 @@ Migrate(app, db)  # initialize migration with app and database as arguments
 # CORS configuration
 CORS(app)
 app.config[
-    'CORS_HEADERS'] = 'Content-Type', 'Authorization', 'Access-Control-Allow-Origin'
+    'CORS_HEADERS'] = 'Content-Type', 'Authorization', 'Access-Control-Allow-Origin', 
+'Access-Control-Allow-Headers', 'Access-Control-Allow-Methods', 'Access-Control-Allow-Credentials'
 app.config[
     'CORS_ORIGINS'] = '*', 'http://localhost:3000', 'http://localhost:5000'
 app.config[
     'CORS_METHODS'] = 'GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'
+app.config[
+    'CORS_EXPOSE_HEADERS'] = 'Content-Type', 'Authorization', 'Access-Control-Allow-Origin',
+'Access-Control-Allow-Headers', 'Access-Control-Allow-Methods', 'Access-Control-Allow-Credentials'
+
+           
 
 
 @app.route('/', defaults={'path': ''})

@@ -22,11 +22,10 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
-@auth_routes.route('/')
-def authenticate():
-    if current_user.is_authenticated:
-        return current_user.to_dict()
-    return {'errors': ['Unauthorized']}, 401
+#@auth_routes.route('/')
+#@login_required
+#def index():
+    #return render_template('index.html')
 
 
 @auth_routes.route('/login', methods=['GET', 'POST'])
