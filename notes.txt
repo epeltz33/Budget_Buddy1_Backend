@@ -1,0 +1,30 @@
+ 
+
+ Create notes and questions I should ask the recruiter about the technical interview.
+
+
+Notes for junior developer interview:
+
+CV- Summary:
+* Show your personality and enthusiasm for the job.
+
+- Lean into the fact that you are a junior developer and that you are eager to learn.
+
+* Tell your story-storytelling is crucial when  you lack experience.
+- Tell them about your journey to becoming a developer and what you have learned along the way.
+
+* Show your passion for coding
+- Tell them about your personal projects and what you have learned from them.
+- Make sure to show them that you are a self-starter and that you are able to learn on your own.
+
+
+Technical interview:
+
+* Be prepared to talk about your projects and what you have learned from them.
+
+* make sure you have a solid understanding of data structures and algorithms.
+
+* be prepared to talk about your experience with version control.
+
+
+    

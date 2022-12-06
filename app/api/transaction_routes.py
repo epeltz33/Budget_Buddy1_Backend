@@ -23,8 +23,8 @@ def add_transaction():
     new_transaction = Transaction(trans_date=request.json['trans_date'],
                                   trans_payee=request.json['trans_payee'],
                                   trans_amount=request.json['trans_amount'],
-                                  categoryId=request.json['categoryId'],
-                                  accountId=request.json['accountId'])
+                                  categoryId=request.json['category_id'],
+                                  accountId=request.json['account_id'])
     db.session.add(new_transaction)
     db.session.commit()
 

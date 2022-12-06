@@ -22,11 +22,10 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
-@auth_routes.route('/')
-def authenticate():
-    if current_user.is_authenticated:
-        return current_user.to_dict()
-    return {'errors': ['Unauthorized']}, 401
+#@auth_routes.route('/')
+#@login_required
+#def index():
+    #return render_template('index.html')
 
 
 @auth_routes.route('/login', methods=['GET', 'POST'])
@@ -37,14 +36,13 @@ def login():
         user = User.query.filter(rest['email'] == User.email).first()
         login_user(user)
         return user.to_dict()
-    
+    #
 
-    form = LoginForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
+    #form = LoginForm()
+    #form['csrf_token'].data = request.cookies['csrf_token']
+    #if form.validate_on_submit():
 
-
-     return {'errors': ['Unauthorized']}, 401
+        return {'errors': ['Unauthorized']}, 401
 
 
 @auth_routes.route('/logout')
@@ -118,8 +116,8 @@ def sign_up():
 
     return user.to_dict()
 
-    #@auth_routes.route('/unauthorized')
-    #def unauthorized():
+@auth_routes.route('/unauthorized')
+def unauthorized():
     """
     Returns unauthorized JSON when flask-login authentication fails
     """
