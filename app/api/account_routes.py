@@ -10,7 +10,7 @@ def get_all_accounts():
   accounts = Account.query.filter(Account.userId == current_user.get_id()).all()
   return {'all_accounts': [account.to_dict() for account in accounts]}
 
-# fetch('/api/accounts/', {method: 'Get'}).then(res => res.json()).then(data => console.log(data));
+
 
 @account_routes.route('/', methods=['POST'])
 @login_required
@@ -55,16 +55,3 @@ def edit_account(accountId):
 
   return account.to_dict()
 
-# const data = { account_name: 'New Account Name'}
-
-# fetch('/api/accounts/6', {
-#   method: 'PUT',
-#   headers: {
-#     'Content-Type': 'application/json',
-#   },
-#   body: JSON.stringify(data),
-# })
-# .then(response => response.json())
-# .then(data => {
-#   console.log('Success:', data);
-# })
