@@ -37,14 +37,14 @@ def login():
         user = User.query.filter(rest['email'] == User.email).first()
         login_user(user)
         return user.to_dict()
-    #
+    
 
-    #form = LoginForm()
-    #form['csrf_token'].data = request.cookies['csrf_token']
-    #if form.validate_on_submit():
+    form = LoginForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
 
 
-#return {'errors': ['Unauthorized']}, 401
+     return {'errors': ['Unauthorized']}, 401
 
 
 @auth_routes.route('/logout')
